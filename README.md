@@ -20,11 +20,13 @@ MySQL で select distinct の対象として多すぎるカラムを指定する
 | docker mysql:5.7.41-debian  |      150 |                     0.55 |        0.03 |
 |                             |      100 |                     0.31 |        0.03 |
 |                             |       50 |                     0.17 |        0.03 |
-| Aurora 2.10 r6g.large       |      150 |                     1.09 |        0.08 |
+| Aurora MySQL v2 r6g.large   |      150 |                     1.09 |        0.08 |
 |                             |      100 |                     0.63 |        0.08 |
 |                             |       50 |                     0.26 |        0.08 |
 
 ## テーブルセットアップ
+
+カラム数=3 の例。
 
 ```sql
 drop database if exists distinct_test;
