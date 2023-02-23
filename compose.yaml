@@ -1,0 +1,25 @@
+services:
+  mysql57:
+    image: mysql:5.7-debian
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: '1'
+    volumes:
+      - type: bind
+        source: ./sql
+        target: /sql
+  mysql8:
+    image: mysql:8-debian
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: '1'
+    volumes:
+      - type: bind
+        source: ./sql
+        target: /sql
+  omysql8:
+    image: mysql:8
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: '1'
+    volumes:
+      - type: bind
+        source: ./sql
+        target: /sql
