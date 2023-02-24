@@ -9,14 +9,14 @@ def main():
     args = p.parse_args()
 
     buf = [
-        'drop database if exists distinct_test;',
-        'create database distinct_test;',
+        'drop schema if exists distinct_test CASCADE;',
+        'create schema distinct_test;',
         f'create table distinct_test.t{args.n_col} (',
         'id int primary key',
     ]
     for i in range(args.n_col):
         buf.append(f', col{i} varchar(36) not null')
-    buf.append(') ROW_FORMAT=DYNAMIC;')
+    buf.append(');')
     print('\n'.join(buf))
 
     for i in range(args.n_row):
@@ -29,15 +29,15 @@ def main():
 
     print(f"""
 create table distinct_test.s{args.n_col} (
-    id int primary key auto_increment,
-    col varchar(36) not null,
-    key i_s_col (col)
-) ROW_FORMAT=DYNAMIC;
+    id serial primary key,
+    col varchar(36) not null
+);
 insert into distinct_test.s{args.n_col} (col) select col0 from distinct_test.t{args.n_col};
 insert into distinct_test.s{args.n_col} (col) select col0 from distinct_test.t{args.n_col};
 insert into distinct_test.s{args.n_col} (col) select col0 from distinct_test.t{args.n_col};
 insert into distinct_test.s{args.n_col} (col) select col0 from distinct_test.t{args.n_col};
 insert into distinct_test.s{args.n_col} (col) select col0 from distinct_test.t{args.n_col};
+create index i_col on distinct_test.s{args.n_col} (col);
 """)
 
 

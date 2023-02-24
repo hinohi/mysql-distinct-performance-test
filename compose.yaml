@@ -23,3 +23,11 @@ services:
       - type: bind
         source: ./sql
         target: /sql
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: password
+    volumes:
+      - type: bind
+        source: ./sql
+        target: /sql
